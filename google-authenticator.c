@@ -78,7 +78,7 @@ static int generateCode(const char *key, unsigned long tm) {
 }
 
 int main(int argc, char *argv[]) {
-  char secret[16];
+  unsigned char secret[20];
   int correct_code;
   int pin_code;
   unsigned long tm;
@@ -88,10 +88,11 @@ int main(int argc, char *argv[]) {
     printf("--> return 'Accept' if pin_code is correct, or 'Reject'\n");
     exit(1);
   }
-  strncpy(secret,  argv[1], 16);
+  strncpy(secret,  argv[1], 20);
   pin_code = atoi(argv[2]);
 
   tm = time(NULL);
+
   correct_code = generateCode(secret, tm);
   printf("%s\n", (correct_code == pin_code) ? "Accept" : "Reject");
   exit(0);
